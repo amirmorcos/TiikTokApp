@@ -11,7 +11,11 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <Pressable
-      style={[styles.container, overrideContainerStyle]}
+      style={[
+        styles.container,
+        disabled && styles.disabled,
+        overrideContainerStyle,
+      ]}
       disabled={disabled}
       onPress={onPress}
     >

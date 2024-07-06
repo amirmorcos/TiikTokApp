@@ -19,6 +19,7 @@ export const Colors = {
     blue: "#3797EF",
     white: "#ffffff",
     black: "#000000",
+    placeholder: "#5E5E5E",
   },
   dark: {
     text: "#ECEDEE",
@@ -32,5 +33,6 @@ export const Colors = {
     blue: "#3797EF",
     white: "#ffffff",
     black: "#000000",
+    placeholder: "#5E5E5E",
   },
 };
