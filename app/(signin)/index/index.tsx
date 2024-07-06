@@ -1,9 +1,12 @@
+import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import { ThemedText } from "@/components/ThemedText";
+import { useAppDispatch } from "@/store";
+import { hideLoading, showLoading } from "@/store/appSlice";
+import { useSigninMutation } from "@/store/authenticationApi";
+import { useForm } from "react-hook-form";
 import { View } from "react-native";
 import styles from "./styles";
-import Button from "@/components/atoms/Button";
-import { useForm } from "react-hook-form";
 
 type SigninFormData = {
   username: string;
@@ -21,18 +24,17 @@ const SigninScreen = () => {
     },
   });
 
+  const [signIn] = useSigninMutation();
+  const dispatch = useAppDispatch();
+
   const onSubmit = async (data: SigninFormData) => {
     try {
-      const response = await fetch(
-        "https://serverless.vibez.app/interviews/home_assignment_v2/login",
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-        }
-      );
-      const result = await response.json();
-      console.log("result", result);
-    } catch (e) {}
+      dispatch(showLoading());
+      await signIn(data);
+    } catch (e) {
+    } finally {
+      dispatch(hideLoading());
+    }
   };
 
   return (
