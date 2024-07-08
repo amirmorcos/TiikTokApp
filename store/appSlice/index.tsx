@@ -7,7 +7,7 @@ const initialState: appState = {
   isLoading: false,
 };
 const appSlice = createSlice({
-  name: "test",
+  name: "app",
   initialState: initialState,
   reducers: {
     showLoading(state) {
