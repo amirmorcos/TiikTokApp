@@ -7,6 +7,7 @@ import { useSigninMutation } from "@/store/authenticationApi";
 import { useForm } from "react-hook-form";
 import { View } from "react-native";
 import styles from "./styles";
+import { storeUser } from "@/store/userSlice";
 
 type SigninFormData = {
   username: string;
@@ -28,13 +29,12 @@ const SigninScreen = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: SigninFormData) => {
-    try {
-      dispatch(showLoading());
-      await signIn(data);
-    } catch (e) {
-    } finally {
-      dispatch(hideLoading());
+    dispatch(showLoading());
+    const response = await signIn(data);
+    if (!response.error) {
+      dispatch(storeUser(response.data));
     }
+    dispatch(hideLoading());
   };
 
   return (
